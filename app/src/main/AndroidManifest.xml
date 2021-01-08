@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Composedemo">
         <activity
-            android:name=".MainActivity"
+            android:name=".window.FloatWindowActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.Composedemo.NoActionBar">
             <intent-filter>

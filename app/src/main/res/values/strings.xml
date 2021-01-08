@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">compose-demo</string>
+    <string name="show_float_window_tips">开启悬浮球</string>
+    <string name="close_float_window_show_tips">关闭悬浮球</string>
 </resources>
