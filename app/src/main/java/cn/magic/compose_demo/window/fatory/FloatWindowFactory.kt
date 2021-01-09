@@ -19,7 +19,7 @@ class FloatWindowFactory {
 
         fun getInstance(
             context: Context,
-            provider: IFloatWindowContentProvider?
+            provider: IFloatWindowContentProvider? = null
         ): FloatWindowFactory {
             if (mFactory == null) {
                 synchronized(this) {
@@ -59,7 +59,7 @@ class FloatWindowFactory {
         return this
     }
 
-    fun replaceContent() {
-
+    fun replaceContent(provider: IFloatWindowContentProvider) {
+        mFloatWindowController?.setProvider(provider)
     }
 }
