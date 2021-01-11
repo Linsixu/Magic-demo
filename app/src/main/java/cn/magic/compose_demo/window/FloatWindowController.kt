@@ -69,11 +69,10 @@ class FloatWindowController(private val context: Context) : IFloatWindowControll
         val params = WindowManager.LayoutParams(
             WindowManager.LayoutParams.WRAP_CONTENT,
             WindowManager.LayoutParams.WRAP_CONTENT,
-            getWindowToken(),
-            // Keeps the button presses from going to the background window
-            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or // Enables the notification to recieve touch events
-                    WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL or  // Draws over status bar
-                    WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,
+            getWindowType(),
+            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or // Keeps the button presses from going to the background window
+                    WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL or // Enables the notification to recieve touch events
+                    WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,// Draws over status bar
             PixelFormat.TRANSLUCENT
         )
         params.gravity = Gravity.LEFT or Gravity.TOP
@@ -86,7 +85,7 @@ class FloatWindowController(private val context: Context) : IFloatWindowControll
      *
      * @return
      */
-    fun getWindowToken(): Int {
+    fun getWindowType(): Int {
         return if (isFloatWindowOpAllowed(mApplicationContext)) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
