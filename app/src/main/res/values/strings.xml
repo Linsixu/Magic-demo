@@ -2,4 +2,7 @@
     <string name="app_name">compose-demo</string>
     <string name="show_float_window_tips">开启悬浮球</string>
     <string name="close_float_window_show_tips">关闭悬浮球</string>
+    <string name="request_contract_permission">申请访问通讯录权限</string>
+    <string name="jump_to_contract_app">跳转到通讯录</string>
+    <string name="jump_to_another_activity">跳转其他activity</string>
 </resources>
