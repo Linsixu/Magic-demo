@@ -1,8 +1,9 @@
-package cn.magic.compose_demo.recycler.item
+package cn.magic.compose_demo.recycler.item.head
 
 import android.view.View
 import android.widget.TextView
 import cn.magic.compose_demo.R
+import cn.magic.compose_demo.recycler.item.BaseViewHolder
 
 /**
  * User: linsixu@yy.com

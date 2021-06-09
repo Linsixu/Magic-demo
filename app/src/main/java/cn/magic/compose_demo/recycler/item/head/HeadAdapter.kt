@@ -1,4 +1,4 @@
-package cn.magic.compose_demo.recycler.item
+package cn.magic.compose_demo.recycler.item.head
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -23,5 +23,9 @@ class HeadAdapter: RecyclerView.Adapter<HeaderViewHolder>() {
 
     override fun onBindViewHolder(holder: HeaderViewHolder, position: Int) {
         holder.bind(position.toString() )
+    }
+
+    override fun onViewDetachedFromWindow(holder: HeaderViewHolder) {
+        super.onViewDetachedFromWindow(holder)
     }
 }

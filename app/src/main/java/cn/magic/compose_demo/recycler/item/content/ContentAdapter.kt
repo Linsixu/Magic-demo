@@ -21,7 +21,7 @@ class ContentAdapter<T : UniteBean>(val content: List<T>) :
             1 -> {
                 val view = LayoutInflater.from(parent.context)
                     .inflate(R.layout.iteam_content_view, parent, false)
-                TextContentViewHolder<TestBean>(view)
+                TextContentViewHolder(view)
             }
             else -> {
                 val view = LayoutInflater.from(parent.context)
@@ -40,8 +40,7 @@ class ContentAdapter<T : UniteBean>(val content: List<T>) :
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder<T>, position: Int) {
-
+        holder.bind(content[position])
     }
-
 }
 
