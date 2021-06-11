@@ -1,6 +1,5 @@
 package cn.magic.compose_demo.recycler.item
 
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import androidx.recyclerview.widget.ConcatAdapter
@@ -17,7 +16,8 @@ class DynamicHeadHelper {
     fun dynamicCalculate(
         recyclerView: RecyclerView,
         headAdapter: RecyclerView.Adapter<*>,
-        contact: ConcatAdapter
+        contact: ConcatAdapter,
+        callBack: () -> Unit
     ) {
         var lastY = 0f
         recyclerView.setOnTouchListener { v: View, event: MotionEvent ->
@@ -50,6 +50,7 @@ class DynamicHeadHelper {
                 MotionEvent.ACTION_UP -> {
                     if (contact.adapters.contains(headAdapter)) {
                         contact.removeAdapter(headAdapter)
+                        callBack.invoke()
                         true
                     } else {
                         false
