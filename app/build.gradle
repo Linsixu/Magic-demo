@@ -2,11 +2,13 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
+    id 'cn.magic.test.study.sixu'
 }
 
 //apply 'com.android.application'
 //apply 'kotlin-android'
 
+//apply plugin: cn.magic.test.study.TransformPlugin
 android {
     compileSdkVersion 28
 
@@ -58,4 +60,5 @@ dependencies {
 
     implementation "androidx.activity:activity:1.2.0"
     implementation "androidx.fragment:fragment:1.3.0"
+    implementation 'com.google.code.gson:gson:2.8.2'
 }
