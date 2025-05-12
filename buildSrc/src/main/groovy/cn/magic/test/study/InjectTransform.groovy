@@ -5,6 +5,8 @@ import com.android.build.gradle.internal.pipeline.TransformManager
 import com.android.utils.FileUtils
 import org.gradle.api.Project
 
+import java.nio.file.Path
+
 class InjectTransform extends Transform {
     private Project mProject;
 
@@ -36,11 +38,23 @@ class InjectTransform extends Transform {
     public void transform(TransformInvocation transformInvocation) throws TransformException, InterruptedException, IOException {
         transformInvocation.inputs.each { input ->
             input.directoryInputs.each { directoryInput ->
-
                 String path = directoryInput.getFile().getAbsolutePath()
                 System.out.println("[cn.magic.test.study.InjectTransform] Begin to inject: " + path)
                 //执行注入逻辑
                 InjectByJavassit.inject(path, mProject)
+//                Files.walk(directoryInput.getFile().toPath())
+//                        .filter{
+//                            it.toString().endsWith(".class")
+//                        }
+//                .forEach {
+//                    String className = pathToClassName(it)
+//                    try {
+//                        InjectByJavassit.injectTrace(className)
+//                    } catch (Exception e) {
+//                        System.out.println("[cn.magic.test.study.InjectTransform] e: " + e.toString())
+//                    }
+//                }
+
 
                 //获取输出目录
                 def dest = transformInvocation.outputProvider.
@@ -61,5 +75,12 @@ class InjectTransform extends Transform {
                 FileUtils.copyFile(jarInput.file, dest)
             }
         }
+    }
+
+    private String pathToClassName(Path path) {
+        // 将路径转换为全限定类名（如 com/example/MyClass -> com.example.MyClass）
+        return path.toString()
+                .replace(".class", "")
+                .replace("/", ".");
     }
 }
