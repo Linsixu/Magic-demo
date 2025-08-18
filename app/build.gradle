@@ -2,16 +2,16 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
-    id 'cn.magic.test.study.sixu'
+//    id 'cn.magic.test.study.sixu'
 }
 
 //apply 'com.android.application'
 //apply 'kotlin-android'
 
-//apply plugin: cn.magic.test.study.TransformPlugin
+//开启Trace插粧
+apply plugin: cn.magic.test.study.TransformPlugin
 android {
     compileSdkVersion 28
-
     defaultConfig {
         applicationId "cn.magic.compose_demo"
         minSdkVersion 19
