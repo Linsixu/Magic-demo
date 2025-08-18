@@ -74,13 +74,6 @@ class InjectByJavassit {
         // project.android.bootClasspath 加入android.jar,不然找不到android相关的所以类
         pool.appendClassPath(project.android.bootClasspath[0].toString())
         try {
-            //implement 是安全的，不可以从代码获取
-//            println("[Inject] androidxActivity first")
-//            File androidxActivity = project.configurations.findByName("implementation").resolvedConfiguration.firstLevelModuleDependencies
-//                    .find {it.moduleName == "activity"}.allModuleArtifacts.find {it.type == "aar"}.file
-//            println("[Inject] androidxActivity: ${androidxActivity.path}")
-//            pool.appendClassPath(androidxActivity)
-
             String activityPath = findAndroidXPath("activity")
             println("[Inject] activityPath= ${activityPath}")
             if (activityPath.length() > 0) {
@@ -90,10 +83,6 @@ class InjectByJavassit {
         } catch (Exception e) {
             System.err.println("[Inject] failure, androidxActivity:" + e.getMessage())
         }
-
-
-//        pool.importPackage('android.os.Bundle')
-//        pool.appendClassPath(androidX.absolutePath)
         CtClass ctClass = pool.getCtClass(cls);
         if (ctClass.name.contains('$')) {
             println("[Inject] 跳过匿名类: ${ctClass.name}")
@@ -105,19 +94,6 @@ class InjectByJavassit {
             ctClass.defrost()
         }
         println("[Inject] ctClass:${ctClass.name}")
-//        // 获取方法 (可以)
-//        CtMethod ctMethod = ctClass.getDeclaredMethod('onCreate')
-//
-//        // 在方法开头插入: Trace.beginSection("methodName");
-//        ctMethod.insertBefore(
-//                String.format("android.os.Trace.beginSection(\"magic-%s\");", ctMethod.name)
-//        );
-//
-//        // 在方法结尾插入: Trace.endSection();
-//        ctMethod.insertAfter(
-//                "android.os.Trace.endSection();",
-//                true // 确保在 return 或 throw 前执行
-//        )
         // 遍历所有声明的方法（不包括继承的方法）
         for (CtMethod method : ctClass.getDeclaredMethods()) {
             try {
@@ -129,6 +105,7 @@ class InjectByJavassit {
                 println("[Inject] insert methodName:$methodName")
                 // 在方法开头插入: Trace.beginSection("methodName");
                 method.insertBefore(
+                        //直接使用全限定名，就不需要import了
                         String.format("android.os.Trace.beginSection(\"magic-%s\");", methodName)
                 );
 
